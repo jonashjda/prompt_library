@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prompt Library</title>
+  <meta name="description" content="A simple, static prompt library you can host on GitHub Pages. Prompts are edited in code only." />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <!--
+    ✅ HOW TO ADD/EDIT PROMPTS
+    - Open app.js and edit the PROMPTS array.
+    - Duplicate an object and change: id, title, tags, and body.
+    - Keep `id` URL-friendly (letters, numbers, dashes). It powers share-links like .../#p=email-summary
+    - Commit & push. Since this is a static site, only you (with repo access) can edit prompts.
+
+    🚀 Deploy to GitHub Pages
+    - Put index.html, styles.css, and app.js in your repo root.
+    - On GitHub: Settings → Pages → Build from “Deploy from a branch” → pick your branch (usually main) and /root.
+    - Open the given URL after it builds.
+  -->
+
+  <header>
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"><span>PL</span></div>
+        <div>
+          <h1>Prompt Library</h1>
+          <div class="muted">Search, filter, and copy your favorite prompts. Static. Git-managed.</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <label class="search" aria-label="Search prompts">
+          <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <input id="q" type="search" placeholder="Search by title, tags, or text… ( / to focus )" autocomplete="off" />
+        </label>
+
+        <div class="toolbar" role="group" aria-label="Actions">
+          <select id="sort" class="select" aria-label="Sort">
+            <option value="title">Sort: A → Z</option>
+            <option value="added">Sort: Recently added</option>
+          </select>
+          <span class="sep" aria-hidden="true"></span>
+          <button id="exportBtn" title="Export prompts as JSON">Export JSON</button>
+          <button id="printBtn" title="Print this page">Print</button>
+          <span class="sep" aria-hidden="true"></span>
+          <button id="themeBtn" aria-pressed="false" title="Toggle theme (dark/light)">Toggle theme</button>
+        </div>
+      </div>
+
+      <div class="tag-row" id="tagRow" aria-label="Filter by tag"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="resultsInfo" class="muted"></div>
+    <section class="grid" id="grid" aria-live="polite"></section>
+    <div id="empty" class="empty" hidden>No prompts match your filters.</div>
+  </main>
+
+  <div class="container footer">
+    <div>Last updated: <span id="lastUpdated"></span></div>
+    <div class="muted">Tip: Press <span class="kbd">/</span> to focus search.</div>
+  </div>
+</body>
+</html>
